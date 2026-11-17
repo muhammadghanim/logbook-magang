@@ -37,3 +37,18 @@ RLS dan isolasi dua akun belum diuji karena tabel serta kebijakan database berad
 - Tangkapan layar desktop dan ponsel diperiksa untuk layar konfigurasi dan login.
 - Pengujian browser dengan respons Auth simulasi diulang: form kosong, kredensial salah, email belum dikonfirmasi, kegagalan jaringan, login, pemulihan sesi, dan logout lulus tanpa exception JavaScript.
 - Logika Supabase Auth tidak diubah. Pengujian proyek Supabase nyata masih tertunda sampai konfigurasi tersedia.
+
+## Tahap 2 — database dan RLS
+
+Pengguna melaporkan login Supabase nyata berhasil sebelum pekerjaan tahap 2. Laporan tersebut membuktikan login pada konfigurasi lokal pengguna; bukan hasil pengujian database dari lingkungan Codex.
+
+- Ditambahkan migrasi `supabase/migrations/202611170001_create_entries.sql`, tabel `entries`, indeks per pemilik/tanggal, empat kebijakan RLS, dan pembatasan hak akses role aplikasi.
+- `npm run test:db` lulus dengan PostgreSQL 17 dalam container sementara. Migrasi asli dijalankan; schema `auth` minimal hanya disiapkan di database uji untuk meniru `auth.uid()` dan referensi pengguna.
+- Query dijalankan sebagai role non-superuser: A/B dapat membaca, membuat, mengubah, dan menghapus milik sendiri; akses baca/update/delete lintas akun tidak menghasilkan baris; insert atas nama orang lain, upsert lintas akun, dan pergantian pemilik ditolak.
+- Pengguna anonim ditolak untuk SELECT/INSERT/UPDATE/DELETE; role terautentikasi tanpa identitas tidak memperoleh akses.
+- Constraint bidang wajib, protokol URL, bukti opsional, default pemilik, dan beberapa entri pada tanggal sama lulus.
+- `npm run build` lulus; kode dan desain frontend tahap 1 tidak diubah.
+- `.env.local` dan `.env.rls.local` diabaikan Git. Contoh konfigurasi hanya berisi placeholder; skrip pengujian tidak masuk ke bundle frontend.
+- Skrip `npm run test:rls:api` disiapkan untuk pengujian lewat API dengan dua akun Supabase nyata, termasuk upsert, serta pembersihan data sintetis. Pemeriksaan sintaks JavaScript lulus; eksekusi terhadap proyek Supabase nyata **belum dilakukan**.
+
+Migrasi **belum diterapkan ke proyek Supabase pengguna** karena lingkungan ini tidak memiliki akses administrator database. Kunci publik frontend tidak dapat menjalankan DDL/migrasi. Jalankan SQL migrasi melalui SQL Editor, kemudian uji API dua akun mengikuti `supabase/README.md`. Keberhasilan tes PostgreSQL lokal belum membuktikan konfigurasi Auth/PostgREST proyek Supabase nyata. Jangan anggap tahap verifikasi database live selesai sebelum uji API lulus.

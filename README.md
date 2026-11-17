@@ -1,6 +1,10 @@
-# Logbook Magang — tahap 1
+# Logbook Magang — tahap 1–2
 
-Fondasi React + Vite dan Supabase Auth dengan email/kata sandi, sesuai `HANDOFF_LOGBOOK.md`. Implementasi mencakup layar masuk, pemulihan sesi saat muat ulang, halaman awal yang hanya tampil setelah masuk, serta keluar dari perangkat ini. Database, RLS, CRUD entri, rekap, CSV, dan deployment belum dikerjakan.
+Fondasi React + Vite dan Supabase Auth dengan email/kata sandi, sesuai `HANDOFF_LOGBOOK.md`. Implementasi mencakup layar masuk, pemulihan sesi saat muat ulang, halaman awal yang hanya tampil setelah masuk, serta keluar dari perangkat ini. Tahap 2 menambahkan migrasi tabel entri, kebijakan RLS, pengujian database lokal, dan skrip uji API dua akun. CRUD entri pada antarmuka, rekap, CSV, dan deployment belum dikerjakan.
+
+## Database dan privasi — tahap 2
+
+Ikuti [petunjuk database](supabase/README.md) untuk menjalankan migrasi di Supabase SQL Editor dan menguji akses A/B. File migrasi dan tes tersedia di folder `supabase/`. Build frontend tidak menerapkan migrasi ke Supabase secara otomatis.
 
 ## Arah visual
 
@@ -40,7 +44,7 @@ Perintah dijalankan di terminal, termasuk terminal bawaan VS Code. Jika `cp` tid
 4. Buat akun uji dengan email/kata sandi melalui Authentication > Users > Add user. Pastikan akun sudah dikonfirmasi. Gunakan data sintetis dan kata sandi yang tidak digunakan di layanan lain.
 5. Mulai ulang `npm run dev` setiap kali mengubah `.env.local`. Untuk produksi, jalankan ulang build setelah mengubah variabel.
 
-Sesi dikelola Supabase JS di browser, termasuk refresh token otomatis. Halaman awal disembunyikan sampai pemeriksaan sesi selesai. Proteksi UI ini bukan pengganti kebijakan database: RLS dan verifikasi akses dua akun adalah pekerjaan tahap 2.
+Sesi dikelola Supabase JS di browser, termasuk refresh token otomatis. Halaman awal disembunyikan sampai pemeriksaan sesi selesai. Proteksi UI ini bukan pengganti kebijakan database: terapkan migrasi RLS tahap 2 dan jalankan pengujian dua akun sebelum memakai data kegiatan nyata.
 
 ## Build produksi
 
