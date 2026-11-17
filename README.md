@@ -2,6 +2,12 @@
 
 Fondasi React + Vite dan Supabase Auth dengan email/kata sandi, sesuai `HANDOFF_LOGBOOK.md`. Implementasi mencakup layar masuk, pemulihan sesi saat muat ulang, halaman awal yang hanya tampil setelah masuk, serta keluar dari perangkat ini. Database, RLS, CRUD entri, rekap, CSV, dan deployment belum dikerjakan.
 
+## Arah visual
+
+Tampilan mengikuti arah visual [idle.space](https://idle.space/): latar abu-abu terang, judul besar di tengah, navigasi mengambang, kartu membulat, tombol hitam, dan aksen kuning. Ilustrasi catatan serta ikon dibuat untuk Logbook Magang. Tampilan menyesuaikan desktop dan ponsel; tautan akses akun mengarahkan fokus ke kartu akun.
+
+Font Funnel Sans disimpan di `public/fonts/` sehingga tidak memerlukan koneksi ke layanan font eksternal saat aplikasi dibuka. Font berlisensi SIL Open Font License; lisensi lengkap tersedia di `public/fonts/OFL.txt`.
+
 ## Menjalankan secara lokal
 
 Gunakan Node.js 22.12+ (Node 24 juga didukung) dan npm.

@@ -28,3 +28,12 @@ Simulasi dilakukan memakai Supabase JS asli dengan permintaan Auth dicegat oleh 
 Isi `.env.local` mengikuti README, siapkan akun uji terkonfirmasi, kemudian uji login benar/salah, akun belum dikonfirmasi, pemulihan sesi, refresh token setelah kedaluwarsa, sinkronisasi keluar lintas tab, dan keluar setelah muat ulang. Simulasi belum membuktikan bahwa URL/kunci, provider Email, dan akun proyek Anda berfungsi.
 
 RLS dan isolasi dua akun belum diuji karena tabel serta kebijakan database berada pada tahap 2. Fitur entri harian, rekap, CSV, dan deployment juga belum diimplementasikan.
+
+## Pembaruan tampilan berdasarkan idle.space
+
+- Referensi diperiksa langsung melalui Chromium pada 17 November 2026.
+- `npm run build` berhasil setelah pembaruan.
+- Preview produksi diperiksa pada lebar 320, 390, 768, 820, 900, 1280, dan 1440 piksel: tidak ada overflow horizontal; font lokal berhasil dimuat; tautan Akses akun memindahkan fokus ke kartu akun.
+- Tangkapan layar desktop dan ponsel diperiksa untuk layar konfigurasi dan login.
+- Pengujian browser dengan respons Auth simulasi diulang: form kosong, kredensial salah, email belum dikonfirmasi, kegagalan jaringan, login, pemulihan sesi, dan logout lulus tanpa exception JavaScript.
+- Logika Supabase Auth tidak diubah. Pengujian proyek Supabase nyata masih tertunda sampai konfigurasi tersedia.
